@@ -1,0 +1,38 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: pause-pipeline
+description: pause-pipeline
+serialPipeline:
+  stages:
+  - targetId: multi-target
+    profiles: [dev]
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: multi-target
+description: multi-target
+multiTarget:
+ targetIds: [ target-1, target-2 ]
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: target-1
+description: target-1
+gke:
+  cluster: projects/platform-dev-8bvnw/locations/europe-west1/clusters/cluster-a
+deployParameters:
+  valkey.host: "1.2.3.4"
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: target-2
+description: target-2
+gke:
+  cluster: projects/platform-dev-8bvnw/locations/us-central1/clusters/cluster-b
+deployParameters:
+  valkey.host: "2.3.4.5"

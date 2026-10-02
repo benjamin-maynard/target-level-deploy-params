@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pause
+  labels:
+    app: pause
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pause
+  template:
+    metadata:
+      labels:
+        app: pause
+    spec:
+      containers:
+        - name: pause
+          image: {{ .Values.image | default "gcr.io/google-containers/pause:3.2" | quote }}
+          env:
+            - name: VALKEY_HOST
+              value: {{ .Values.valkey.host | quote }}
+            - name: SOME_OTHER_CONFIG
+              value: {{ .Values.someOtherConfig | quote }}

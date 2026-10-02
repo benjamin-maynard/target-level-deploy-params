@@ -1,0 +1,30 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+build:
+  artifacts:
+    - image: image
+deploy:
+  helm:
+    releases:
+      - name: pause
+        chartPath: helm
+        valuesFiles:
+          - _config/dev.yaml
+        artifactOverrides:
+          image: image
+profiles:
+  - name: dev
+    build:
+      artifacts:
+        - image: image
+    deploy:
+      helm:
+        releases:
+          - name: pause
+            chartPath: helm
+            valuesFiles:
+              - _config/dev.yaml
+            artifactOverrides:
+              image: image
+            setValues:
+              helmProfile: dev

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: pause
+description: A Helm chart to deploy the GCP pause container
+type: application
+version: 0.1.0
+appVersion: "3.2"

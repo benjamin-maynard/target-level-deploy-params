@@ -1,0 +1,8 @@
+image: gcr.io/google-containers/pause:3.2
+
+# Passed in by Cloud Deploy (e.g. via target-level deploy parameter)
+valkey:
+  host: ""
+
+# Environment variable defined in environment config (e.g. _config/dev.yaml)
+someOtherConfig: "default"
